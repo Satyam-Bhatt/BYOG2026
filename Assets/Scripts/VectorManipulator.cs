@@ -53,8 +53,8 @@ public class VectorManipulator : MonoBehaviour
 
             if(vType == ValueType.VectorOp)
             {
-                Vector2 val1 = v1.data;
-                Vector2 val2 = v2.data;
+                Vector3 val1 = v1.data;
+                Vector3 val2 = v2.data;
                 Vector3 output = Vector3.zero;
                 float scalarOutput = 0;
                 bool vector3D = false;
@@ -66,7 +66,9 @@ public class VectorManipulator : MonoBehaviour
                     scalarOutput = Vector3.Dot(val1, val2);
                     vector3D = true;
 
-                    GameObject scalarObj = Instantiate(m_Scalar, m_Container2.transform);
+                    GameObject scalarObj = Instantiate(m_Scalar, m_OutputContainer_Scalar.transform);
+                    RectTransform rectScalar = scalarObj.GetComponent<RectTransform>();
+                    rectScalar.anchoredPosition = Vector3.zero;
                     ScalarData newScalarData = scalarObj.GetComponent<ScalarData>();
                     newScalarData.UpdateData(scalarOutput);
                 }
@@ -86,6 +88,49 @@ public class VectorManipulator : MonoBehaviour
                     rectObj.SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical, rectObj.sizeDelta.y / sizeDiff - 20);
                 }
             }
+            else if (vType == ValueType.VectorScalarOp)
+            {
+                Vector3 val1 = v1 != null ? v1.data : v2.data;
+                float sVal2 = s1 != null ? s1.scalarData : s2.scalarData;
+
+                Vector3 output = Vector3.zero;
+                if (oType == OperationType.Add || oType == OperationType.Subtract)
+                {
+                    Debug.LogError("Invalid Operand");
+                    return;
+                }
+                else if (oType == OperationType.Multiply) output = val1 * sVal2;
+
+                GameObject obj = Instantiate(m_Vector, m_OutputContainer.transform);
+                VectorData newVectorData = obj.GetComponent<VectorData>();
+                newVectorData.UpdateVector3D(output);
+
+                RectTransform rectObj = obj.GetComponent<RectTransform>();
+                RectTransform rectContainer = m_OutputContainer.GetComponent<RectTransform>();
+
+                if (rectObj.sizeDelta.y >= rectContainer.sizeDelta.y)
+                {
+                    float sizeDiff = rectObj.sizeDelta.y / rectContainer.sizeDelta.x;
+                    rectObj.SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical, rectObj.sizeDelta.y / sizeDiff - 20);
+                }
+            }
+            else if(vType == ValueType.ScalarOp)
+            {
+                float val1 = s1.scalarData;
+                float val2 = s2.scalarData;
+
+                float scalarOutput = 0;
+                if (oType == OperationType.Add) scalarOutput = val1 + val2;
+                else if (oType == OperationType.Subtract) scalarOutput = val1 - val2;
+                else if (oType == OperationType.Multiply) scalarOutput = val1 * val2;
+
+                GameObject scalarObj = Instantiate(m_Scalar, m_OutputContainer_Scalar.transform);
+                RectTransform rectScalar = scalarObj.GetComponent<RectTransform>();
+                rectScalar.anchoredPosition = Vector3.zero;
+                ScalarData newScalarData = scalarObj.GetComponent<ScalarData>();
+                newScalarData.UpdateData(scalarOutput);
+            }
+
             break;
         }
     }

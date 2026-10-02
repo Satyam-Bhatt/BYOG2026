@@ -8,6 +8,7 @@ public class Selector : MonoBehaviour
 {
     public GameObject label;
     private TMP_Text labelText;
+    private Vector3 initialPosition;
     GameObject m_PickedUpObject = null;
 
     private void Awake()
@@ -40,6 +41,7 @@ public class Selector : MonoBehaviour
 
         m_PickedUpObject = go;
         m_PickedUpObject.GetComponent<Data>().UpdateData();
+        initialPosition = m_PickedUpObject.transform.position;
     }
 
     void Hold()
@@ -50,8 +52,19 @@ public class Selector : MonoBehaviour
     void Leave()
     {
         GameObject container = GetObjectUnderCursor("Container");
-        if (container != null)
+        if (container != null && !container.GetComponent<Container>().isFilled)
         {
+            if (!container.GetComponent<Container>().m_AcceptEverything)
+            {
+                VectorData vD = m_PickedUpObject.GetComponent<VectorData>();
+                if (vD == null)
+                {
+                    m_PickedUpObject.transform.position = initialPosition;
+                    m_PickedUpObject = null; 
+                    return;
+                }
+            }
+
             m_PickedUpObject.transform.SetParent(container.transform);
             RectTransform rectObj = m_PickedUpObject.GetComponent<RectTransform>();
             RectTransform rectContainer = container.GetComponent<RectTransform>();
@@ -64,6 +77,7 @@ public class Selector : MonoBehaviour
         }
         else
         {
+            m_PickedUpObject.transform.position = initialPosition;
             m_PickedUpObject.transform.SetParent(this.transform);
         }
 

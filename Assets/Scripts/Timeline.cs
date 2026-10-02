@@ -27,7 +27,7 @@ public class Timeline : MonoBehaviour
         if (containers[currentFrame].m_VectorData == null) return;
 
 
-        Vector2 vec = containers[currentFrame].m_VectorData.data;
+        Vector3 vec = containers[currentFrame].m_VectorData.data;
         MovePlayer(vec);
         containers[currentFrame].m_VectorData.canBePicked = false;
         currentFrame++;
@@ -35,7 +35,7 @@ public class Timeline : MonoBehaviour
 
     public void PlayAll()
     {
-        Vector2 vec = containers[currentFrame].m_VectorData.data;
+        Vector3 vec = containers[currentFrame].m_VectorData.data;
         containers[currentFrame].m_VectorData.canBePicked = false;
         MovePlayer(vec, CallBackMethod);
     }
@@ -51,18 +51,18 @@ public class Timeline : MonoBehaviour
             return;
         }
 
-        Vector2 vec = containers[currentFrame].m_VectorData.data;
+        Vector3 vec = containers[currentFrame].m_VectorData.data;
         MovePlayer(-vec);
         containers[currentFrame].m_VectorData.canBePicked = true;
     }
 
-    public void MovePlayer(Vector2 move, Action doSomething = null)
+    public void MovePlayer(Vector3 move, Action doSomething = null)
     {
         if (animPlaying) return;
 
         animPlaying = true;
 
-        m_Player.DOMove(m_Player.transform.position + new Vector3(move.x, move.y, 0), 0.3f)
+        m_Player.DOMove(m_Player.transform.position + move, 0.3f)
             .SetEase(Ease.OutBack)
             .OnComplete(() =>
             {
@@ -76,7 +76,7 @@ public class Timeline : MonoBehaviour
         currentFrame++;
         if (currentFrame == containers.Length || containers[currentFrame].m_VectorData == null) return;
 
-        Vector2 vecI = containers[currentFrame].m_VectorData.data;
+        Vector3 vecI = containers[currentFrame].m_VectorData.data;
         containers[currentFrame].m_VectorData.canBePicked = false;
         MovePlayer(vecI, CallBackMethod);
     }
