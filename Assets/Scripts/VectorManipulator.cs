@@ -7,8 +7,11 @@ public class VectorManipulator : MonoBehaviour
     public GameObject m_Container1;
     public GameObject m_Container2;
     public Toggle[] m_Operations;
-    public GameObject m_Vector;
     public GameObject m_OutputContainer;
+    public GameObject m_OutputContainer_Scalar;
+    [Header("Prefabs")]
+    public GameObject m_Vector;
+    public GameObject m_Scalar;
 
     private void Update()
     {
@@ -52,13 +55,27 @@ public class VectorManipulator : MonoBehaviour
             {
                 Vector2 val1 = v1.data;
                 Vector2 val2 = v2.data;
-                Vector2 output = Vector2.zero;
+                Vector3 output = Vector3.zero;
+                float scalarOutput = 0;
+                bool vector3D = false;
                 if (oType == OperationType.Add) output = val1 + val2;
                 if (oType == OperationType.Subtract) output = val1 - val2;
+                if (oType == OperationType.Multiply)
+                {
+                    output = Vector3.Cross(val1, val2);
+                    scalarOutput = Vector3.Dot(val1, val2);
+                    vector3D = true;
+
+                    GameObject scalarObj = Instantiate(m_Scalar, m_Container2.transform);
+                    ScalarData newScalarData = scalarObj.GetComponent<ScalarData>();
+                    newScalarData.UpdateData(scalarOutput);
+                }
 
                 GameObject obj = Instantiate(m_Vector, m_OutputContainer.transform);
                 VectorData newVectorData = obj.GetComponent<VectorData>();
-                newVectorData.UpdateVector(output);
+                
+                if(vector3D) newVectorData.UpdateVector3D(output);
+                else newVectorData.UpdateVector(output);
 
                 RectTransform rectObj = obj.GetComponent<RectTransform>();
                 RectTransform rectContainer = m_OutputContainer.GetComponent<RectTransform>();

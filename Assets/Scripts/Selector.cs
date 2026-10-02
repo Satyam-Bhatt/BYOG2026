@@ -35,11 +35,11 @@ public class Selector : MonoBehaviour
     {
         if(go == null) return;
 
-        VectorData vD = go.GetComponentInChildren<VectorData>();
+        Data vD = go.GetComponentInChildren<Data>();
         if (!vD.canBePicked) return;
 
         m_PickedUpObject = go;
-        m_PickedUpObject.GetComponent<VectorData>().UpdateVector();
+        m_PickedUpObject.GetComponent<Data>().UpdateData();
     }
 
     void Hold()
