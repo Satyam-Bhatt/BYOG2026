@@ -7,6 +7,7 @@ public class VectorData : MonoBehaviour
 
     [HideInInspector] public Vector2 direction;
     [HideInInspector] public float magnitude;
+    [HideInInspector] public bool canBePicked = true;
 
     private RectTransform rectT;
 
@@ -28,6 +29,15 @@ public class VectorData : MonoBehaviour
     public void UpdateVector(Vector2 a_Data)
     {
         data = a_Data;
+        direction = data.normalized;
+        magnitude = data.magnitude;
+        rectT.SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical, 100 * magnitude);
+        float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
+        transform.rotation = Quaternion.AngleAxis(angle - 90, Vector3.forward);
+    }
+
+    public void UpdateVector()
+    {
         direction = data.normalized;
         magnitude = data.magnitude;
         rectT.SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical, 100 * magnitude);
