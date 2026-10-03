@@ -92,4 +92,9 @@ public class GameManager : MonoBehaviour
         hasDied = true;
         Debug.Log("Die");
     }
+
+    private void OnDestroy()
+    {
+        Destroy(gameObject);
+    }
 }

@@ -2,6 +2,7 @@ using DG.Tweening;
 using System;
 using System.Collections;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Timeline : MonoBehaviour
 {
@@ -11,12 +12,29 @@ public class Timeline : MonoBehaviour
     private int currentFrame = 0;
     public CameraRotator camRotator;
 
+    private Image[] containerImages;
+    public Slider slider;
+
     private Vector3 startPos = Vector3.zero;
 
     private void Start()
     {
         camRotator = FindFirstObjectByType<CameraRotator>();
         startPos = m_Player.transform.position;
+
+        containerImages = new Image[containers.Length];
+        for (int i = 0; i < containers.Length; i++)
+        {
+            containerImages[i] = containers[i].GetComponent<Image>();
+        }
+
+        slider.value = (float)currentFrame / (float)containers.Length;
+        for (int i = 0; i < containers.Length; i++)
+        {
+            if (i < currentFrame) containerImages[i].color = Color.red;
+            else if (i == currentFrame) containerImages[i].color = Color.green;
+            else containerImages[i].color = Color.yellow;
+        }
     }
 
     public void NextFrame()
@@ -31,12 +49,20 @@ public class Timeline : MonoBehaviour
 
 
         Vector3 vec = containers[currentFrame].m_VectorData.data;
-        
+
         if (!containers[currentFrame].m_VectorData.permanent) Destroy(containers[currentFrame].m_VectorData.gameObject);
 
         StartCoroutine(MovePlayer(vec));
         // containers[currentFrame].m_VectorData.canBePicked = false;
         currentFrame++;
+        
+        slider.value = (float)currentFrame / (float)containers.Length;
+        for (int i = 0; i < containers.Length; i++)
+        {
+            if (i < currentFrame) containerImages[i].color = Color.red;
+            else if (i == currentFrame) containerImages[i].color = Color.green;
+            else containerImages[i].color = Color.yellow;
+        }
     }
 
     public void PlayAll()
@@ -45,7 +71,7 @@ public class Timeline : MonoBehaviour
         // containers[currentFrame].m_VectorData.canBePicked = false;
 
         if (!containers[currentFrame].m_VectorData.permanent) Destroy(containers[currentFrame].m_VectorData.gameObject);
-        
+
         StartCoroutine(MovePlayer(vec, CallBackMethod));
     }
 
@@ -60,11 +86,20 @@ public class Timeline : MonoBehaviour
             return;
         }
 
-        if(containers[currentFrame].m_VectorData == null)
+        if (containers[currentFrame].m_VectorData == null)
         {
             currentFrame++;
             return;
         }
+
+        slider.value = (float)currentFrame / (float)containers.Length;
+        for (int i = 0; i < containers.Length; i++)
+        {
+            if (i < currentFrame) containerImages[i].color = Color.red;
+            else if (i == currentFrame) containerImages[i].color = Color.green;
+            else containerImages[i].color = Color.yellow;
+        }
+
 
         Vector3 vec = containers[currentFrame].m_VectorData.data;
         if (!containers[currentFrame].m_VectorData.permanent) Destroy(containers[currentFrame].m_VectorData.gameObject);
@@ -101,6 +136,14 @@ public class Timeline : MonoBehaviour
     {
         currentFrame++;
         if (currentFrame == containers.Length || containers[currentFrame].m_VectorData == null) return;
+
+        slider.value = (float)currentFrame / (float)containers.Length;
+        for (int i = 0; i < containers.Length; i++)
+        {
+            if (i < currentFrame) containerImages[i].color = Color.red;
+            else if (i == currentFrame) containerImages[i].color = Color.green;
+            else containerImages[i].color = Color.yellow;
+        }
 
         Vector3 vecI = containers[currentFrame].m_VectorData.data;
         // containers[currentFrame].m_VectorData.canBePicked = false;

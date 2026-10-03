@@ -80,9 +80,9 @@ public class VectorManipulator : MonoBehaviour
 
             GameObject obj = Instantiate(m_Vector, m_OutputContainer.transform);
             VectorData newVectorData = obj.GetComponent<VectorData>();
-
-            if (vector3D) newVectorData.UpdateVector3D(output);
-            else newVectorData.UpdateVector(output);
+            newVectorData.UpdateVector3D(output);
+            //if (vector3D) newVectorData.UpdateVector3D(output);
+            //else newVectorData.UpdateVector(output);
 
             if (!outputPermanent) newVectorData.permanent = false;
 
