@@ -6,6 +6,8 @@ TagManager:
   tags:
   - InteractableVector
   - Container
+  - Collectable
+  - Kill
   layers:
   - Default
   - TransparentFX

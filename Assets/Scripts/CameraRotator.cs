@@ -63,7 +63,11 @@ public class CameraRotator : MonoBehaviour
             IsCameraReset = true;
             cPC.TargetOffset.x = 5;
         }
-        else cPC.TargetOffset.x = 0;
+        else
+        {
+            IsCameraReset = false;
+            cPC.TargetOffset.x = 0;
+        }
 
         rotating = false;
     }

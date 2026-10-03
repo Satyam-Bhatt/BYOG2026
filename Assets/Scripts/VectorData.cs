@@ -1,3 +1,4 @@
+using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
@@ -10,6 +11,7 @@ public class VectorData : Data
     public Image image;
     public Sprite intoTheScreen;
     public Sprite outOfTheScreen;
+    public TMP_Text text;
 
     [HideInInspector] public Vector3 direction;
     [HideInInspector] public float magnitude;
@@ -51,6 +53,8 @@ public class VectorData : Data
             image.gameObject.SetActive(true);
         }
         else image.gameObject.SetActive(false);
+
+        text.text = $"({data.x}, {data.y}, {data.z})";
     }
 
     public void UpdateVector(Vector2 a_Data)

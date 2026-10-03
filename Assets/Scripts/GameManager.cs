@@ -1,4 +1,7 @@
 using UnityEngine;
+using System;
+using UnityEngine.SceneManagement;
+using DG.Tweening;
 
 public class GameManager : MonoBehaviour
 {
@@ -23,7 +26,12 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    public bool XYview = true;
+    public event Action ViewChanged, OnWin, OnDie;
+    private bool _XYview = true;
+    public bool XYview { get => _XYview; set { _XYview = value; ViewChanged?.Invoke(); } }
+    public int totalCollectableCount = 0;
+    public int collectedCount = 0;
+    public static bool hasDied = false;
 
     private void Awake()
     {
@@ -39,8 +47,49 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    private void OnEnable()
+    {
+        SceneManager.sceneLoaded += OnSceneLoaded;
+    }
+
+
+    private void OnDisable()
+    {
+        SceneManager.sceneLoaded -= OnSceneLoaded;
+    }
+
+    private void OnSceneLoaded(Scene arg0, LoadSceneMode arg1)
+    {
+        totalCollectableCount = GameObject.FindGameObjectsWithTag("Collectable").Length;
+        collectedCount = 0;
+        hasDied = false;
+    }
+
     private void Start()
     {
         XYview = true;
+    }
+
+    public void Collected()
+    {
+        collectedCount++;
+        if (collectedCount == totalCollectableCount)
+        {
+            Win();
+        }
+    }
+
+    public void Win()
+    {
+        OnWin?.Invoke();
+        Debug.Log("Win");
+    }
+
+    public void Die()
+    {
+        DOTween.KillAll();
+        OnDie?.Invoke();
+        hasDied = true;
+        Debug.Log("Die");
     }
 }

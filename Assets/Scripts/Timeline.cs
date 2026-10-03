@@ -64,9 +64,12 @@ public class Timeline : MonoBehaviour
         if (animPlaying) yield break;
 
         if (!CameraRotator.IsCameraReset)
+        {
             camRotator.ResetCamera();
+            yield return new WaitUntil(() => CameraRotator.IsCameraReset);
+            yield return new WaitForSeconds(0.5f);
+        }
 
-        yield return new WaitUntil(() => CameraRotator.IsCameraReset);
 
         animPlaying = true;
 

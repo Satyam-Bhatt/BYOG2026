@@ -1,4 +1,5 @@
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class CreatingCartesian : MonoBehaviour
@@ -8,8 +9,18 @@ public class CreatingCartesian : MonoBehaviour
     public int numberOfBars = 10;
     public Transform barContainerTransform;
     public Transform barXContainerTransform;
-    public Transform vertical, horizontal;
+    public Transform vertical, horizontal, z, z1;
     public static bool allSet = false;
+
+    private void OnEnable()
+    {
+        GameManager.Instance.ViewChanged += ViewChange;
+    }
+
+    private void OnDisable()
+    {
+        GameManager.Instance.ViewChanged -= ViewChange;
+    }
 
     private void Start()
     {
@@ -36,11 +47,18 @@ public class CreatingCartesian : MonoBehaviour
         horizontal.transform.position = Vector3.zero;
 
         allSet = true;
+
+        ViewChange();
     }
 
-    private void Update()
+    void ViewChange()
     {
         barContainerTransform.gameObject.SetActive(GameManager.Instance.XYview);
         barXContainerTransform.gameObject.SetActive(!GameManager.Instance.XYview);
-    }
+
+        z.gameObject.SetActive(!GameManager.Instance.XYview);
+        z1.gameObject.SetActive(!GameManager.Instance.XYview);
+        vertical.gameObject.SetActive(GameManager.Instance.XYview);
+        horizontal.gameObject.SetActive(GameManager.Instance.XYview);
+    }    
 }
