@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 2025580024931103041}
   - component: {fileID: -3036913935849832989}
   m_Layer: 5
-  m_Name: Bars
+  m_Name: BarsX
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -88,3 +88,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4e9d04dd3ebf3f149aa38ca54c264955, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BarScript
+  player: {fileID: 0}
+  moveInZ: 0

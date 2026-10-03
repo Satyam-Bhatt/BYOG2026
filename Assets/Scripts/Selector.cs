@@ -111,11 +111,13 @@ public class Selector : MonoBehaviour
 
         int nearestX = Mathf.RoundToInt(mouseWorldPos.x);
         int nearestY = Mathf.RoundToInt(mouseWorldPos.y);
+        int nearestZ = Mathf.RoundToInt(mouseWorldPos.z);
 
         float distanceX = Mathf.Abs(mouseWorldPos.x - nearestX);
         float distanceY = Mathf.Abs(mouseWorldPos.y - nearestY);
+        float distanceZ = Mathf.Abs(mouseWorldPos.z - nearestZ);
 
-        if (distanceX < 0.2f && distanceY < 0.2f)
+        if (GameManager.Instance.XYview && distanceX < 0.2f && distanceY < 0.2f )
         {
             label.SetActive(true);
             label.transform.position = Mouse.current.position.ReadValue();
@@ -131,7 +133,25 @@ public class Selector : MonoBehaviour
             );
 
             label.transform.position += offset;
-            labelText.text = $"({nearestX}, {nearestY})";
+            labelText.text = $"({nearestX}, {nearestY}, {nearestZ})";
+        }
+        else if (!GameManager.Instance.XYview && distanceZ < 0.2f && distanceY < 0.2f)
+        {
+            label.SetActive(true);
+            label.transform.position = Mouse.current.position.ReadValue();
+
+            RectTransform rectTransform = label.GetComponent<RectTransform>();
+            Canvas canvas = label.GetComponentInParent<Canvas>();
+
+            float scaleFactor = canvas.scaleFactor;
+            Vector3 offset = new Vector3(
+                (rectTransform.rect.width / 2 + 20) * scaleFactor,
+                (rectTransform.rect.height / 2 + 10) * scaleFactor,
+                0
+            );
+
+            label.transform.position += offset;
+            labelText.text = $"({nearestX}, {nearestY}, {nearestZ})";
         }
         else
         {
