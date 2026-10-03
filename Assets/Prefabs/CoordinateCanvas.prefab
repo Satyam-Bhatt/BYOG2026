@@ -124,7 +124,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BarScript
   player: {fileID: 0}
-  moveInZ: 1
+  moveInZ: 0
 --- !u!1 &1993185611760889000
 GameObject:
   m_ObjectHideFlags: 0
@@ -304,7 +304,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BarScript
   player: {fileID: 0}
-  moveInZ: 1
+  moveInZ: 0
 --- !u!1 &7955138460896522210
 GameObject:
   m_ObjectHideFlags: 0

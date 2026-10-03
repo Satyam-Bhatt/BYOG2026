@@ -1,5 +1,6 @@
 using DG.Tweening;
 using System;
+using System.Collections;
 using UnityEngine;
 
 public class Timeline : MonoBehaviour
@@ -8,11 +9,13 @@ public class Timeline : MonoBehaviour
     public Transform m_Player;
     public static bool animPlaying = false;
     private int currentFrame = 0;
+    public CameraRotator camRotator;
 
     private Vector3 startPos = Vector3.zero;
 
     private void Start()
     {
+        camRotator = FindFirstObjectByType<CameraRotator>();
         startPos = m_Player.transform.position;
     }
 
@@ -28,7 +31,7 @@ public class Timeline : MonoBehaviour
 
 
         Vector3 vec = containers[currentFrame].m_VectorData.data;
-        MovePlayer(vec);
+        StartCoroutine(MovePlayer(vec));
         containers[currentFrame].m_VectorData.canBePicked = false;
         currentFrame++;
     }
@@ -37,7 +40,7 @@ public class Timeline : MonoBehaviour
     {
         Vector3 vec = containers[currentFrame].m_VectorData.data;
         containers[currentFrame].m_VectorData.canBePicked = false;
-        MovePlayer(vec, CallBackMethod);
+        StartCoroutine(MovePlayer(vec, CallBackMethod));
     }
 
     public void PreviousFrame()
@@ -52,13 +55,18 @@ public class Timeline : MonoBehaviour
         }
 
         Vector3 vec = containers[currentFrame].m_VectorData.data;
-        MovePlayer(-vec);
+        StartCoroutine(MovePlayer(-vec));
         containers[currentFrame].m_VectorData.canBePicked = true;
     }
 
-    public void MovePlayer(Vector3 move, Action doSomething = null)
+    public IEnumerator MovePlayer(Vector3 move, Action doSomething = null)
     {
-        if (animPlaying) return;
+        if (animPlaying) yield break;
+
+        if (!CameraRotator.IsCameraReset)
+            camRotator.ResetCamera();
+
+        yield return new WaitUntil(() => CameraRotator.IsCameraReset);
 
         animPlaying = true;
 
@@ -78,6 +86,6 @@ public class Timeline : MonoBehaviour
 
         Vector3 vecI = containers[currentFrame].m_VectorData.data;
         containers[currentFrame].m_VectorData.canBePicked = false;
-        MovePlayer(vecI, CallBackMethod);
+        StartCoroutine(MovePlayer(vecI, CallBackMethod));
     }
 }

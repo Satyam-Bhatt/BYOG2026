@@ -37,6 +37,11 @@ public class Selector : MonoBehaviour
         if(go == null) return;
 
         Data vD = go.GetComponentInChildren<Data>();
+        if (vD == null)
+        {
+            vD = go.transform.parent.GetComponent<Data>();
+            go = go.transform.parent.gameObject;
+        }
         if (!vD.canBePicked) return;
 
         m_PickedUpObject = go;

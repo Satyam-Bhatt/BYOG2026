@@ -1,9 +1,15 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.UI;
 
 public class VectorData : Data
 {
-    public Vector3 data;
+    [SerializeField] private Vector3 _data;
+    public Vector3 data { get => _data; set { _data = value; DataUpdated(); } }
+
+    public Image image;
+    public Sprite intoTheScreen;
+    public Sprite outOfTheScreen;
 
     [HideInInspector] public Vector3 direction;
     [HideInInspector] public float magnitude;
@@ -24,6 +30,27 @@ public class VectorData : Data
         // float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
         // transform.rotation = Quaternion.AngleAxis(angle - 90, Vector3.forward);
         transform.rotation = Quaternion.FromToRotation(Vector3.up, data);
+    }
+
+    private void Start()
+    {
+        data = _data;
+        UpdateData();
+    }
+
+    public void DataUpdated()
+    {
+        if (direction == new Vector3(0, 0, -1)) 
+        {
+            image.sprite = outOfTheScreen; 
+            image.gameObject.SetActive(true);
+        }
+        else if (direction == new Vector3(0, 0, 1))
+        {
+            image.sprite = intoTheScreen; 
+            image.gameObject.SetActive(true);
+        }
+        else image.gameObject.SetActive(false);
     }
 
     public void UpdateVector(Vector2 a_Data)
@@ -49,7 +76,8 @@ public class VectorData : Data
         direction = data.normalized;
         magnitude = data.magnitude;
         rectT.SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical, 100 * magnitude);
-        float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
-        transform.rotation = Quaternion.AngleAxis(angle - 90, Vector3.forward);
+        //float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
+        //transform.rotation = Quaternion.AngleAxis(angle - 90, Vector3.forward);
+        transform.rotation = Quaternion.FromToRotation(Vector3.up, data);
     }
 }
