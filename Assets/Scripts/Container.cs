@@ -15,7 +15,7 @@ public class Container : MonoBehaviour
 
     private void Update()
     {
-        if(Mouse.current.leftButton.wasReleasedThisFrame)
+        if (Mouse.current.leftButton.wasReleasedThisFrame)
         {
             StartCoroutine(CheckForChild());
         }
@@ -26,7 +26,7 @@ public class Container : MonoBehaviour
         isFilled = transform.childCount > 0;
         m_VectorData = GetComponentInChildren<VectorData>();
         yield return new WaitForEndOfFrame();
-        if(m_VectorData == null)
+        if (m_VectorData == null)
             m_VectorData = GetComponentInChildren<VectorData>();
         isFilled = transform.childCount > 0;
         FitChild();

@@ -11,18 +11,46 @@ public class ScalarData : Data
     {
         m_Text = GetComponentInChildren<TMP_Text>();
     }
+
+    private void OnValidate()
+    {
+        m_Text = GetComponentInChildren<TMP_Text>();
+        m_Text.text = scalarData.ToString();
+        if (!permanent)
+        {
+            m_Text.color = Color.brown;
+        }
+        else m_Text.color = Color.white;
+    }
+
     private void Start()
     {
-        m_Text.text = scalarData.ToString();
+        m_Text.text = scalarData.ToString(); 
+        if (!permanent)
+        {
+            m_Text.color = Color.brown;
+        }
     }
     public override void UpdateData()
     {
         m_Text.text = scalarData.ToString();
+
+        if (!permanent)
+        {
+            m_Text.color = Color.brown;
+        }
+        else m_Text.color = Color.white;
     }
     public void UpdateData(float scalar)
     {
         scalarData = scalar;
         m_Text.text = scalarData.ToString();
+
+        if (!permanent)
+        {
+            m_Text.color = Color.brown;
+        }
+        else m_Text.color = Color.white;
     }
 
 }

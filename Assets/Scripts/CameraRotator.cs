@@ -10,11 +10,18 @@ public class CameraRotator : MonoBehaviour
     private static bool rotating;
     public static bool IsCameraReset = true;
 
+    private float initialOffset;
+
     private CinemachinePositionComposer cPC;
 
     private void Awake()
     {
         cPC = GetComponent<CinemachinePositionComposer>();
+    }
+
+    private void Start()
+    {
+        initialOffset = cPC.TargetOffset.x;
     }
 
     public void LeftButton()
@@ -61,7 +68,7 @@ public class CameraRotator : MonoBehaviour
         if (targetY == 0)
         {
             IsCameraReset = true;
-            cPC.TargetOffset.x = 5;
+            cPC.TargetOffset.x = initialOffset;
         }
         else
         {

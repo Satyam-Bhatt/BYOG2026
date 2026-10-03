@@ -467,6 +467,8 @@ MonoBehaviour:
   barXContainerTransform: {fileID: 3773297523105159553}
   vertical: {fileID: 4792552118697389383}
   horizontal: {fileID: 3766915525669865914}
+  z: {fileID: 8834930292445082569}
+  z1: {fileID: 7029332220690574942}
 --- !u!1 &8516091759822304367
 GameObject:
   m_ObjectHideFlags: 0

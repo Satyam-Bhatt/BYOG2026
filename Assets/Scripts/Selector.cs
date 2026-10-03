@@ -83,7 +83,7 @@ public class Selector : MonoBehaviour
         else
         {
             m_PickedUpObject.transform.position = initialPosition;
-            m_PickedUpObject.transform.SetParent(this.transform);
+            //m_PickedUpObject.transform.SetParent(this.transform);
         }
 
         m_PickedUpObject = null;

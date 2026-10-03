@@ -21,7 +21,7 @@ public class Timeline : MonoBehaviour
 
     public void NextFrame()
     {
-        if (currentFrame > containers.Length)
+        if (currentFrame >= containers.Length)
         {
             currentFrame = containers.Length;
             return;
@@ -31,15 +31,21 @@ public class Timeline : MonoBehaviour
 
 
         Vector3 vec = containers[currentFrame].m_VectorData.data;
+        
+        if (!containers[currentFrame].m_VectorData.permanent) Destroy(containers[currentFrame].m_VectorData.gameObject);
+
         StartCoroutine(MovePlayer(vec));
-        containers[currentFrame].m_VectorData.canBePicked = false;
+        // containers[currentFrame].m_VectorData.canBePicked = false;
         currentFrame++;
     }
 
     public void PlayAll()
     {
         Vector3 vec = containers[currentFrame].m_VectorData.data;
-        containers[currentFrame].m_VectorData.canBePicked = false;
+        // containers[currentFrame].m_VectorData.canBePicked = false;
+
+        if (!containers[currentFrame].m_VectorData.permanent) Destroy(containers[currentFrame].m_VectorData.gameObject);
+        
         StartCoroutine(MovePlayer(vec, CallBackMethod));
     }
 
@@ -49,14 +55,23 @@ public class Timeline : MonoBehaviour
 
         if (currentFrame == -1)
         {
-            m_Player.transform.position = startPos;
+            //m_Player.transform.position = startPos;
             currentFrame = 0;
             return;
         }
 
+        if(containers[currentFrame].m_VectorData == null)
+        {
+            currentFrame++;
+            return;
+        }
+
         Vector3 vec = containers[currentFrame].m_VectorData.data;
+        if (!containers[currentFrame].m_VectorData.permanent) Destroy(containers[currentFrame].m_VectorData.gameObject);
+
         StartCoroutine(MovePlayer(-vec));
-        containers[currentFrame].m_VectorData.canBePicked = true;
+
+        // containers[currentFrame].m_VectorData.canBePicked = true;
     }
 
     public IEnumerator MovePlayer(Vector3 move, Action doSomething = null)
@@ -74,7 +89,7 @@ public class Timeline : MonoBehaviour
         animPlaying = true;
 
         m_Player.DOMove(m_Player.transform.position + move, 0.3f)
-            .SetEase(Ease.OutBack)
+            .SetEase(Ease.InSine)
             .OnComplete(() =>
             {
                 animPlaying = false;
@@ -88,7 +103,10 @@ public class Timeline : MonoBehaviour
         if (currentFrame == containers.Length || containers[currentFrame].m_VectorData == null) return;
 
         Vector3 vecI = containers[currentFrame].m_VectorData.data;
-        containers[currentFrame].m_VectorData.canBePicked = false;
+        // containers[currentFrame].m_VectorData.canBePicked = false;
+
+        if (!containers[currentFrame].m_VectorData.permanent) Destroy(containers[currentFrame].m_VectorData.gameObject);
+
         StartCoroutine(MovePlayer(vecI, CallBackMethod));
     }
 }

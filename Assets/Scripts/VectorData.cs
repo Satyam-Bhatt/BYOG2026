@@ -32,12 +32,22 @@ public class VectorData : Data
         // float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
         // transform.rotation = Quaternion.AngleAxis(angle - 90, Vector3.forward);
         transform.rotation = Quaternion.FromToRotation(Vector3.up, data);
+
+        if (!permanent)
+        {
+            GetComponent<Image>().color = Color.brown;
+        }
+        else GetComponent<Image>().color = Color.white;
     }
 
     private void Start()
     {
         data = _data;
         UpdateData();
+        if (!permanent)
+        {
+            GetComponent<Image>().color = Color.brown;
+        }
     }
 
     public void DataUpdated()
@@ -55,6 +65,12 @@ public class VectorData : Data
         else image.gameObject.SetActive(false);
 
         text.text = $"({data.x}, {data.y}, {data.z})";
+
+        if (!permanent)
+        {
+            GetComponent<Image>().color = Color.brown;
+        }
+        else GetComponent<Image>().color = Color.white;
     }
 
     public void UpdateVector(Vector2 a_Data)
