@@ -3,6 +3,7 @@ using System;
 using Unity.Cinemachine;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.UI;
 
 public class CameraRotator : MonoBehaviour
 {
@@ -37,6 +38,31 @@ public class CameraRotator : MonoBehaviour
                 UpdateCameraLook();
             });
     }
+    public void LeftButtonDown()
+    {
+        Camera.main.orthographic = false;
+        rotating = true;
+        targetY += 60;
+        transform.DORotate(new Vector3(0, targetY, 0), 0.5f)
+            .OnComplete(() =>
+            {
+                transform.eulerAngles = new Vector3(0, targetY, 0);
+                //UpdateCameraLook();
+            });
+    }
+    public void LeftButtonUp()
+    {
+        Camera.main.orthographic = true;
+
+        rotating = true;
+        targetY -= 60;
+        transform.DORotate(new Vector3(0, targetY, 0), 0.5f)
+            .OnComplete(() =>
+            {
+                transform.eulerAngles = new Vector3(0, targetY, 0);
+                //UpdateCameraLook();
+            });
+    }
 
     public void RightButton()
     {
@@ -49,6 +75,28 @@ public class CameraRotator : MonoBehaviour
             {
                 transform.eulerAngles = new Vector3(0, targetY, 0);
                 UpdateCameraLook();
+            });
+    }
+    public void RightButtonDown()
+    {
+        Camera.main.orthographic = false;
+        targetY -= 60;
+        transform.DORotate(new Vector3(0, targetY, 0), 0.5f)
+            .OnComplete(() =>
+            {
+                transform.eulerAngles = new Vector3(0, targetY, 0);
+                //UpdateCameraLook();
+            });
+    }
+    public void RightButtonUp()
+    {
+        Camera.main.orthographic = true;
+        targetY += 60;
+        transform.DORotate(new Vector3(0, targetY, 0), 0.5f)
+            .OnComplete(() =>
+            {
+                transform.eulerAngles = new Vector3(0, targetY, 0);
+                //UpdateCameraLook();
             });
     }
 

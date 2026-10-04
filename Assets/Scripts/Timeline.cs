@@ -9,6 +9,7 @@ public class Timeline : MonoBehaviour
     public Container[] containers;
     public Transform m_Player;
     public static bool animPlaying = false;
+    public static event Action OnMove, OnStop;
     private int currentFrame = 0;
     public CameraRotator camRotator;
 
@@ -122,10 +123,12 @@ public class Timeline : MonoBehaviour
 
         animPlaying = true;
         AudioManager.Instance.OnMove();
-        m_Player.DOMove(m_Player.transform.position + move, 0.3f)
-            .SetEase(Ease.InSine)
+        OnMove?.Invoke();
+        m_Player.DOMove(m_Player.transform.position + move, 0.5f)
+            .SetEase(Ease.InOutSine)
             .OnComplete(() =>
             {
+                OnStop?.Invoke();
                 animPlaying = false;
                 doSomething?.Invoke();
             });

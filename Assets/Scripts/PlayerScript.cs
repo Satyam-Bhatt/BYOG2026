@@ -8,6 +8,8 @@ public class PlayerScript : MonoBehaviour
     public bool activeTex = false;
     public TMP_Text text;
 
+    public Animator anim;
+
     private void Start()
     {
         if (activeTex)
@@ -25,11 +27,15 @@ public class PlayerScript : MonoBehaviour
     private void OnEnable()
     {
         GameManager.Instance.OnDie += Die;
+        Timeline.OnMove += OnMove;
+        Timeline.OnStop += OnStop;
     }
 
     private void OnDisable()
     {
         GameManager.Instance.OnDie -= Die;
+        Timeline.OnMove -= OnMove;
+        Timeline.OnStop -= OnStop;
     }
 
     private void Update()
@@ -45,5 +51,15 @@ public class PlayerScript : MonoBehaviour
     public void Die()
     {
         transform.DOScale(Vector3.zero, 0.5f).OnComplete(() => SceneManager.LoadScene(SceneManager.GetActiveScene().name));
-    }    
+    }   
+    
+    public void OnMove()
+    {
+        anim.SetBool("Move", true);
+    }
+
+    public void OnStop()
+    {
+        anim.SetBool("Move", false);
+    }
 }

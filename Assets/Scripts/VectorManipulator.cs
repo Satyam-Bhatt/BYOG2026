@@ -1,3 +1,5 @@
+using DG.Tweening;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
@@ -11,6 +13,12 @@ public class VectorManipulator : MonoBehaviour
     [Header("Prefabs")]
     public GameObject m_Vector;
     public GameObject m_Scalar;
+    Color originalColor;
+
+    private void Start()
+    {
+        originalColor = m_OutputContainer.GetComponent<Image>().color;
+    }
 
     private void Update()
     {
@@ -20,6 +28,26 @@ public class VectorManipulator : MonoBehaviour
 
     public void ComputeVector(int i = 0)
     {
+        if(m_OutputContainer.GetComponent<Container>().isFilled || m_OutputContainer_Scalar.GetComponent<Container>().isFilled)
+        {
+            Image i1 = m_OutputContainer.GetComponent<Image>();
+            Image i2 = m_OutputContainer_Scalar.GetComponent<Image>();
+
+            if(m_OutputContainer.GetComponent<Container>().isFilled)
+            {
+                Sequence flash = DOTween.Sequence();
+                flash.Append(i1.DOColor(Color.red, 0.15f));
+                flash.Append(i1.DOColor(originalColor, 0.15f));
+            }
+            if(m_OutputContainer_Scalar.GetComponent<Container>().isFilled)
+            {
+                Sequence flash = DOTween.Sequence();
+                flash.Append(i2.DOColor(Color.red, 0.15f));
+                flash.Append(i2.DOColor(originalColor, 0.15f));
+            }
+            return;
+        }
+
         VectorData v1 = null, v2 = null;
         ScalarData s1 = null, s2 = null;
         ValueType vType;

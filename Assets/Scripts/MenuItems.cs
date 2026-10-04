@@ -7,7 +7,7 @@ public class MenuItems : MonoBehaviour
 
     private void Start()
     {
-        nextButton.SetActive(false);
+        nextButton.transform.parent.gameObject.SetActive(false);
     }
 
     private void OnEnable()
@@ -22,6 +22,7 @@ public class MenuItems : MonoBehaviour
 
     public void Win()
     {
+        nextButton.transform.parent.gameObject.SetActive(true);
         nextButton.SetActive(true);
     }
 
