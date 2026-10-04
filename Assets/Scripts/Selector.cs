@@ -10,6 +10,7 @@ public class Selector : MonoBehaviour
     private TMP_Text labelText;
     private Vector3 initialPosition;
     GameObject m_PickedUpObject = null;
+    Transform m_PreviousParent = null;
 
     private void Awake()
     {
@@ -49,6 +50,8 @@ public class Selector : MonoBehaviour
         m_PickedUpObject = go;
         m_PickedUpObject.GetComponent<Data>().UpdateData();
         initialPosition = m_PickedUpObject.transform.position;
+        m_PreviousParent = m_PickedUpObject.transform.parent;
+        m_PickedUpObject.transform.SetParent(this.transform);
     }
 
     void Hold()
@@ -85,6 +88,7 @@ public class Selector : MonoBehaviour
         else
         {
             m_PickedUpObject.transform.position = initialPosition;
+            if (m_PreviousParent != null) m_PickedUpObject.transform.SetParent(m_PreviousParent);
             //m_PickedUpObject.transform.SetParent(this.transform);
         }
         AudioManager.Instance.OnDrop();

@@ -14,6 +14,7 @@ public class Timeline : MonoBehaviour
 
     private Image[] containerImages;
     public Slider slider;
+    public Toggle EasyMode;
 
     private Vector3 startPos = Vector3.zero;
 
@@ -151,4 +152,9 @@ public class Timeline : MonoBehaviour
 
         StartCoroutine(MovePlayer(vecI, CallBackMethod));
     }
+
+    public void ToggleFlip()
+    {
+        GameManager.easyMode = EasyMode.isOn;
+    }    
 }

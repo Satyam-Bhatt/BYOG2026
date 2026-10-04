@@ -32,6 +32,7 @@ public class GameManager : MonoBehaviour
     public int totalCollectableCount = 0;
     public int collectedCount = 0;
     public static bool hasDied = false;
+    public static bool easyMode = false;
 
     private void Awake()
     {
@@ -63,6 +64,7 @@ public class GameManager : MonoBehaviour
         totalCollectableCount = GameObject.FindGameObjectsWithTag("Collectable").Length;
         collectedCount = 0;
         hasDied = false;
+        easyMode = false;
     }
 
     private void Start()
@@ -90,6 +92,7 @@ public class GameManager : MonoBehaviour
     public void Die()
     {
         DOTween.KillAll();
+        Timeline.animPlaying = false;
         OnDie?.Invoke();
         hasDied = true;
         Debug.Log("Die");

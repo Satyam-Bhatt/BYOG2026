@@ -12,6 +12,8 @@ public class TestingCameraSystem : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (!GameManager.easyMode) return;
+
         if(Keyboard.current.dKey.isPressed)
         {
             transform.position += Vector3.right * 10 * Time.deltaTime;

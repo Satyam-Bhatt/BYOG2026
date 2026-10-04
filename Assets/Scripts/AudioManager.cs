@@ -54,9 +54,9 @@ public class AudioManager : MonoBehaviour
 
     private void OnDisable()
     {
-        GameManager.Instance.OnTokenCollect += OnTokenCollected;
-        GameManager.Instance.OnDie += OnDie;
-        GameManager.Instance.OnWin += OnWin;
+        GameManager.Instance.OnTokenCollect -= OnTokenCollected;
+        GameManager.Instance.OnDie -= OnDie;
+        GameManager.Instance.OnWin -= OnWin;
         SceneManager.sceneLoaded -= OnSceneLoaded;
     }
 
