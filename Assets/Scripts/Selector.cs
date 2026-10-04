@@ -44,6 +44,8 @@ public class Selector : MonoBehaviour
         }
         if (!vD.canBePicked) return;
 
+        AudioManager.Instance.OnPickup();
+
         m_PickedUpObject = go;
         m_PickedUpObject.GetComponent<Data>().UpdateData();
         initialPosition = m_PickedUpObject.transform.position;
@@ -85,7 +87,7 @@ public class Selector : MonoBehaviour
             m_PickedUpObject.transform.position = initialPosition;
             //m_PickedUpObject.transform.SetParent(this.transform);
         }
-
+        AudioManager.Instance.OnDrop();
         m_PickedUpObject = null;
     }
 

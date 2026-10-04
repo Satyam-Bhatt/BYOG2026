@@ -105,8 +105,6 @@ public class Timeline : MonoBehaviour
         if (!containers[currentFrame].m_VectorData.permanent) Destroy(containers[currentFrame].m_VectorData.gameObject);
 
         StartCoroutine(MovePlayer(-vec));
-
-        // containers[currentFrame].m_VectorData.canBePicked = true;
     }
 
     public IEnumerator MovePlayer(Vector3 move, Action doSomething = null)
@@ -122,7 +120,7 @@ public class Timeline : MonoBehaviour
 
 
         animPlaying = true;
-
+        AudioManager.Instance.OnMove();
         m_Player.DOMove(m_Player.transform.position + move, 0.3f)
             .SetEase(Ease.InSine)
             .OnComplete(() =>
@@ -135,7 +133,6 @@ public class Timeline : MonoBehaviour
     public void CallBackMethod()
     {
         currentFrame++;
-        if (currentFrame == containers.Length || containers[currentFrame].m_VectorData == null) return;
 
         slider.value = (float)currentFrame / (float)containers.Length;
         for (int i = 0; i < containers.Length; i++)
@@ -145,6 +142,8 @@ public class Timeline : MonoBehaviour
             else containerImages[i].color = Color.yellow;
         }
 
+        if (currentFrame == containers.Length || containers[currentFrame].m_VectorData == null) return;
+        
         Vector3 vecI = containers[currentFrame].m_VectorData.data;
         // containers[currentFrame].m_VectorData.canBePicked = false;
 

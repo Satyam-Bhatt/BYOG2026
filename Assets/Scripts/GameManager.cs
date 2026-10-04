@@ -26,7 +26,7 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    public event Action ViewChanged, OnWin, OnDie;
+    public event Action ViewChanged, OnWin, OnDie, OnTokenCollect;
     private bool _XYview = true;
     public bool XYview { get => _XYview; set { _XYview = value; ViewChanged?.Invoke(); } }
     public int totalCollectableCount = 0;
@@ -73,6 +73,8 @@ public class GameManager : MonoBehaviour
     public void Collected()
     {
         collectedCount++;
+        OnTokenCollect?.Invoke();
+
         if (collectedCount == totalCollectableCount)
         {
             Win();
