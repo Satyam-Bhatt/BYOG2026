@@ -8,6 +8,7 @@ TagManager:
   - Container
   - Collectable
   - Kill
+  - ImportantPanel
   layers:
   - Default
   - TransparentFX

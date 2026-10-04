@@ -21,21 +21,21 @@ public class Selector : MonoBehaviour
     {
         ShowLabel();
 
-        if(Mouse.current.leftButton.wasPressedThisFrame)
+        if (Mouse.current.leftButton.wasPressedThisFrame)
             PickUp(GetObjectUnderCursor("InteractableVector"));
 
-        if(Mouse.current.leftButton.isPressed && m_PickedUpObject != null)
+        if (Mouse.current.leftButton.isPressed && m_PickedUpObject != null)
         {
             Hold();
         }
 
-        if(Mouse.current.leftButton.wasReleasedThisFrame && m_PickedUpObject != null)
+        if (Mouse.current.leftButton.wasReleasedThisFrame && m_PickedUpObject != null)
             Leave();
     }
 
     void PickUp(GameObject go)
     {
-        if(go == null) return;
+        if (go == null) return;
 
         Data vD = go.GetComponentInChildren<Data>();
         if (vD == null)
@@ -57,7 +57,7 @@ public class Selector : MonoBehaviour
     void Hold()
     {
         m_PickedUpObject.transform.position = Mouse.current.position.ReadValue();
-    }    
+    }
 
     void Leave()
     {
@@ -70,7 +70,7 @@ public class Selector : MonoBehaviour
                 if (vD == null)
                 {
                     m_PickedUpObject.transform.position = initialPosition;
-                    m_PickedUpObject = null; 
+                    m_PickedUpObject = null;
                     return;
                 }
             }
@@ -79,7 +79,7 @@ public class Selector : MonoBehaviour
             RectTransform rectObj = m_PickedUpObject.GetComponent<RectTransform>();
             RectTransform rectContainer = container.GetComponent<RectTransform>();
             rectObj.anchoredPosition = Vector2.zero;
-            if(rectObj.sizeDelta.y >= rectContainer.sizeDelta.y)
+            if (rectObj.sizeDelta.y >= rectContainer.sizeDelta.y)
             {
                 float sizeDiff = rectObj.sizeDelta.y / rectContainer.sizeDelta.x;
                 rectObj.SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical, rectObj.sizeDelta.y / sizeDiff - 20);
@@ -116,6 +116,12 @@ public class Selector : MonoBehaviour
 
     void ShowLabel()
     {
+        if (GetObjectUnderCursor("ImportantPanel") != null)
+        {
+            label.SetActive(false);
+            return;
+        }
+
         Vector3 mouseScreenPos = Mouse.current.position.ReadValue();
         mouseScreenPos.z = 10f;
         Vector3 mouseWorldPos = Camera.main.ScreenToWorldPoint(mouseScreenPos);
@@ -128,7 +134,7 @@ public class Selector : MonoBehaviour
         float distanceY = Mathf.Abs(mouseWorldPos.y - nearestY);
         float distanceZ = Mathf.Abs(mouseWorldPos.z - nearestZ);
 
-        if (GameManager.Instance.XYview && distanceX < 0.2f && distanceY < 0.2f )
+        if (GameManager.Instance.XYview && distanceX < 0.2f && distanceY < 0.2f)
         {
             label.SetActive(true);
             label.transform.position = Mouse.current.position.ReadValue();

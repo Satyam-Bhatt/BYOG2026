@@ -59,39 +59,43 @@ MonoBehaviour:
   drop: {fileID: 8300000, guid: 8366140d8ebf3ef4bb573d837ea541e3, type: 3}
   voiceOvers:
   - isPlayed: 0
-    voiceOver: {fileID: 0}
+    voiceOver: {fileID: 8300000, guid: 035d1e9bfe47ae0409d90473ba83f72c, type: 3}
   - isPlayed: 0
-    voiceOver: {fileID: 0}
+    voiceOver: {fileID: 8300000, guid: 3508b08ce4e57aa4f98f8b4f75889cf4, type: 3}
   - isPlayed: 0
-    voiceOver: {fileID: 0}
+    voiceOver: {fileID: 8300000, guid: 1fadb06ebb98156449d359f61028e3ed, type: 3}
   - isPlayed: 0
-    voiceOver: {fileID: 0}
+    voiceOver: {fileID: 8300000, guid: 360255cc46d1e8949b1f56eb5d8c4006, type: 3}
   - isPlayed: 0
-    voiceOver: {fileID: 0}
+    voiceOver: {fileID: 8300000, guid: 8af3aaefad5b66b4a90fb22f7c535e0f, type: 3}
   - isPlayed: 0
-    voiceOver: {fileID: 0}
+    voiceOver: {fileID: 8300000, guid: 16de9a6f2bbd0524fb96356cd75074a6, type: 3}
   - isPlayed: 0
-    voiceOver: {fileID: 0}
+    voiceOver: {fileID: 8300000, guid: 5150af975a0b43b44959e93e29e7372c, type: 3}
   - isPlayed: 0
-    voiceOver: {fileID: 0}
+    voiceOver: {fileID: 8300000, guid: 3adfc0ca6b838c34982021a8a83dc25f, type: 3}
   - isPlayed: 0
-    voiceOver: {fileID: 0}
+    voiceOver: {fileID: 8300000, guid: caa79254d31027c4884ba78653f97144, type: 3}
   - isPlayed: 0
-    voiceOver: {fileID: 0}
+    voiceOver: {fileID: 8300000, guid: 196f6b44bc27917439aad54e1c8b9349, type: 3}
   - isPlayed: 0
-    voiceOver: {fileID: 0}
+    voiceOver: {fileID: 8300000, guid: eba7d5de6d00f0548820dd0c0f0eaa8d, type: 3}
   - isPlayed: 0
-    voiceOver: {fileID: 0}
+    voiceOver: {fileID: 8300000, guid: 1baa796e8c74421499b9a71029cef4a1, type: 3}
   - isPlayed: 0
-    voiceOver: {fileID: 0}
+    voiceOver: {fileID: 8300000, guid: 3a856e7d6d81fa6478435a890dd31000, type: 3}
   - isPlayed: 0
-    voiceOver: {fileID: 0}
+    voiceOver: {fileID: 8300000, guid: 63e78fd2cfb9a6f438045a9ff58e42f2, type: 3}
   - isPlayed: 0
-    voiceOver: {fileID: 0}
+    voiceOver: {fileID: 8300000, guid: c79070c12aefd3c408a5ff578f6e11c0, type: 3}
   - isPlayed: 0
-    voiceOver: {fileID: 0}
+    voiceOver: {fileID: 8300000, guid: 465013861c6b3c3479b45b402155bfdd, type: 3}
   - isPlayed: 0
-    voiceOver: {fileID: 0}
+    voiceOver: {fileID: 8300000, guid: 5232972bcb7d2104f830272c6225ecdd, type: 3}
+  - isPlayed: 0
+    voiceOver: {fileID: 8300000, guid: 59471b494112a014f9d401067f0ee548, type: 3}
+  - isPlayed: 0
+    voiceOver: {fileID: 8300000, guid: 5e4bd6f8d0beaef419f32b47495d4560, type: 3}
 --- !u!82 &7066745709258705919
 AudioSource:
   m_ObjectHideFlags: 0
@@ -105,7 +109,7 @@ AudioSource:
   m_audioClip: {fileID: 0}
   m_Resource: {fileID: 8300000, guid: 8ff5f991c854fde4a852b40fb847baef, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 0.5
+  m_Volume: 0.2
   m_Pitch: 1
   Loop: 1
   Mute: 0

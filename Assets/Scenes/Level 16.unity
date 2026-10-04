@@ -1172,6 +1172,10 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: -42.14605
       objectReference: {fileID: 0}
+    - target: {fileID: 366676397802918098, guid: 3c86aed36f98f094ea8b703cd053fea0, type: 3}
+      propertyPath: m_TagString
+      value: ImportantPanel
+      objectReference: {fileID: 0}
     - target: {fileID: 444729478297944364, guid: 3c86aed36f98f094ea8b703cd053fea0, type: 3}
       propertyPath: m_Group
       value: 
@@ -1396,6 +1400,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: VectorCanvas
       objectReference: {fileID: 0}
+    - target: {fileID: 5170232418049076076, guid: 3c86aed36f98f094ea8b703cd053fea0, type: 3}
+      propertyPath: m_TagString
+      value: ImportantPanel
+      objectReference: {fileID: 0}
     - target: {fileID: 5278076954186890715, guid: 3c86aed36f98f094ea8b703cd053fea0, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -1556,6 +1564,30 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 7169200232587998896, guid: 3c86aed36f98f094ea8b703cd053fea0, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7169200232587998896, guid: 3c86aed36f98f094ea8b703cd053fea0, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7169200232587998896, guid: 3c86aed36f98f094ea8b703cd053fea0, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7169200232587998896, guid: 3c86aed36f98f094ea8b703cd053fea0, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7169200232587998896, guid: 3c86aed36f98f094ea8b703cd053fea0, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7169200232587998896, guid: 3c86aed36f98f094ea8b703cd053fea0, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7217163529928293713, guid: 3c86aed36f98f094ea8b703cd053fea0, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -1715,6 +1747,10 @@ PrefabInstance:
     - target: {fileID: 8565906030325681873, guid: 3c86aed36f98f094ea8b703cd053fea0, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8602990113301212653, guid: 3c86aed36f98f094ea8b703cd053fea0, type: 3}
+      propertyPath: m_TagString
+      value: ImportantPanel
       objectReference: {fileID: 0}
     - target: {fileID: 8753715225745611927, guid: 3c86aed36f98f094ea8b703cd053fea0, type: 3}
       propertyPath: m_IsActive
